@@ -24,7 +24,6 @@ const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!, {
 });
 
 // Initialize Gemini (Standard Stable)
-// User Requirement: Force initialization without v1beta mentions
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 // Types
@@ -174,21 +173,19 @@ async function uploadImageToSupabase(
 }
 
 async function generateGeminiDescription(imageBuffer: Buffer): Promise<string> {
-  // Check key availability - although init is global, runtime check is safe
   if (!GEMINI_API_KEY)
     return "Descripción automática no disponible (Token faltante).";
 
   try {
-    console.log(`[${BUILD_TAG}] >>> GEMINI Request Started (1.5 Flash Stable)`);
+    console.log(`[${BUILD_TAG}] >>> GEMINI Request Started (2.5 Flash 2026)`);
 
-    // Use gemini-1.5-flash as requested
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Use gemini-2.5-flash as requested by the user
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt =
       "Describe este producto para una tienda de regalos. Sé breve, atractivo y enfocado en la venta. Máximo 2 frases.";
     const base64Data = imageBuffer.toString("base64");
 
-    // Standard payload for 1.5
     const result = await model.generateContent([
       prompt,
       {
@@ -352,12 +349,12 @@ export async function POST(req: Request) {
         currentState = "AWAITING_NAME";
         await sendMessage(
           chatId,
-          "✅ Descripción aprobada. ¿Cuál es el nombre del producto?",
+          "✅ Descripción confirmada. ¿Cuál es el nombre del producto?",
         );
       } else if (data === "retry_desc") {
         currentState = "IDLE";
         draft = {};
-        await sendMessage(chatId, "🔄 Reiniciando. Envía otra foto.");
+        await sendMessage(chatId, "🔄 Entendido. Envía otra foto.");
       } else if (data.startsWith("act_disable_")) {
         const productId = data.split("_")[2];
         console.log(
@@ -430,7 +427,7 @@ export async function POST(req: Request) {
         if (update.message.photo) {
           await sendMessage(
             chatId,
-            "✨ Analizando imagen con Gemini 1.5 Flash...",
+            "✨ Analizando imagen con Gemini 2.5 Flash...",
           );
           const photo = update.message.photo[update.message.photo.length - 1];
           const fileUrl = await getFileUrl(photo.file_id);
@@ -460,12 +457,9 @@ export async function POST(req: Request) {
 
               if (publicUrl) {
                 try {
-                  // Gemini Vision: generates text but DOES NOT persist product yet
                   const description =
                     await generateGeminiDescription(imageBuffer);
 
-                  // CheckPoint: If success, move to AWAITING_APPROVAL
-                  // If fail, it will be caught below and state remains IDLE (retry possible)
                   draft = {
                     ...draft,
                     image_url: publicUrl,
@@ -475,10 +469,15 @@ export async function POST(req: Request) {
 
                   const keyboard = {
                     inline_keyboard: [
-                      [{ text: "✅ Aprobar", callback_data: "approve_desc" }],
                       [
                         {
-                          text: "🔄 Generar otra",
+                          text: "✅ Confirmar y Publicar",
+                          callback_data: "approve_desc",
+                        },
+                      ],
+                      [
+                        {
+                          text: "🔄 Intentar de nuevo",
                           callback_data: "retry_desc",
                         },
                       ],
@@ -486,11 +485,10 @@ export async function POST(req: Request) {
                   };
                   await sendMessage(
                     chatId,
-                    `🤖 **Descripción Sugerida:**\n"${description}"\n\n¿Deseas usar esta descripción?`,
+                    `🤖 **Descripción Sugerida:**\n"${description}"\n\n¿Es correcta esta descripción?`,
                     keyboard,
                   );
                 } catch (geminiError: any) {
-                  // Error in Generation -> Notify and Log. State stays IDLE (user can re-upload)
                   await logError(geminiError, { stage: "gemini_generation" });
                   await sendMessage(
                     chatId,
@@ -517,10 +515,7 @@ export async function POST(req: Request) {
 
       case "AWAITING_APPROVAL":
         // Should be handled by callback, but if text text sent:
-        await sendMessage(
-          chatId,
-          "Por favor usa los botones de Aprobar o Reintentar.",
-        );
+        await sendMessage(chatId, "Por favor usa los botones para confirmar.");
         break;
 
       case "AWAITING_NAME":
@@ -569,7 +564,10 @@ export async function POST(req: Request) {
           if (insertError) {
             throw insertError;
           } else {
-            await sendMessage(chatId, "✅ Producto guardado con éxito");
+            await sendMessage(
+              chatId,
+              "✅ Producto guardado y publicado con éxito.",
+            );
           }
           currentState = "IDLE";
           draft = {};
