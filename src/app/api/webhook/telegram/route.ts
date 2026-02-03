@@ -107,6 +107,14 @@ export async function POST(req: Request) {
   try {
     const update: TelegramUpdate = await req.json();
 
+    console.log("📥 Mensaje Recibido:", JSON.stringify(update, null, 2));
+    console.log(
+      "🔐 Check Vars: TOKEN?",
+      !!TELEGRAM_BOT_TOKEN,
+      "SUPABASE?",
+      !!SUPABASE_SERVICE_ROLE_KEY,
+    );
+
     // Immediate 200 OK to Telegram
     if (!update.message) {
       return NextResponse.json({ ok: true });
@@ -115,6 +123,7 @@ export async function POST(req: Request) {
     const chatId = update.message.chat.id;
 
     // 1. Verify Owner & Connection
+    console.log("🔍 Consultando tg_owner_id en DB...");
     const { data: config, error: configError } = await supabase
       .from("config")
       .select("tg_owner_id, current_state, draft_product")
@@ -125,8 +134,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true });
     }
 
+    console.log("✅ Config found. Owner ID:", config.tg_owner_id);
+
     if (String(config.tg_owner_id) !== String(update.message.from.id)) {
       console.warn("Unauthorized access attempt:", update.message.from.id);
+      await sendMessage(
+        chatId,
+        `⚠️ Acceso denegado. Tu ID es ${update.message.from.id}. Regístralo en Supabase.`,
+      );
       return NextResponse.json({ ok: true });
     }
 
@@ -263,7 +278,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error("Webhook error:", error);
+    console.error("❌ Error en Webhook:", error);
     return NextResponse.json({ ok: true });
   }
 }
