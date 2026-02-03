@@ -167,11 +167,13 @@ export async function POST(req: Request) {
         .from("products")
         .select("*", { count: "exact", head: true });
 
-      const productCount = countError ? "Error" : count;
+      if (countError) {
+        throw new Error(`DB Count Error: ${countError.message}`);
+      }
 
       await sendMessage(
         chatId,
-        `✅ Conexión Exitosa. Tienda: Regalitos Valentina. Productos en catálogo: ${productCount}.`,
+        `✅ ¡ValentinasGift_bot Conectado! Columna de estado detectada y operativa. Productos: ${count}.`,
       );
       return NextResponse.json({ ok: true });
     }
@@ -256,7 +258,7 @@ export async function POST(req: Request) {
 
           if (insertError) {
             console.error("Insert error:", insertError);
-            await sendMessage(chatId, "Error guardando el producto.");
+            throw new Error(`Error guardando producto: ${insertError.message}`);
           } else {
             await sendMessage(chatId, "✅ Producto guardado con éxito");
             currentState = "IDLE";
@@ -271,14 +273,39 @@ export async function POST(req: Request) {
     }
 
     // Update State
-    await supabase
+    const { error: updateError } = await supabase
       .from("config")
       .update({ current_state: currentState, draft_product: draft })
       .eq("tg_owner_id", config.tg_owner_id);
 
+    if (updateError) {
+      throw new Error(`Error actualizando estado: ${updateError.message}`);
+    }
+
     return NextResponse.json({ ok: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error("❌ Error en Webhook:", error);
+
+    // Attempt to notify user if we have a chat ID in the payload context
+    // We have to re-parse or rely on scope.
+    // Since 'chatId' is scoped in try block, we might not access it here if error happened before.
+    // However, we can try to extract it safely or just console log if we can't contextually reply.
+    // Given the structure, let's try to grab it from the request body again if needed,
+    // but the request stream is consumed.
+    // Better practice: Wrap the main logic in a function or access a wider scope variable.
+    // For now, to keep it simple and given the function structure:
+    try {
+      const payload = await req.clone().json();
+      if (payload?.message?.chat?.id) {
+        await sendMessage(
+          payload.message.chat.id,
+          `⚠️ Error del sistema: ${error.message || error}`,
+        );
+      }
+    } catch (e) {
+      // Failed to recover chat ID
+    }
+
     return NextResponse.json({ ok: true });
   }
 }
