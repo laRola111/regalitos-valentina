@@ -29,16 +29,17 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 // Types
 type BotState =
   | "IDLE"
-  | "AWAITING_APPROVAL"
-  | "AWAITING_MANUAL_EDIT"
   | "AWAITING_NAME"
   | "AWAITING_PRICE"
-  | "SELECTING_CATEGORY"
-  | "AWAITING_NEW_CATEGORY_NAME"
+  | "AWAITING_CATEGORY"
+  | "AWAITING_APPROVAL"
+  | "AWAITING_MANUAL_DESC"
   | "AWAITING_FINAL_CONFIRMATION"
   | "SELECTING_PRODUCT_EDIT"
   | "SELECTING_PRODUCT_DISABLE"
-  | "SELECTING_PRODUCT_DELETE";
+  | "SELECTING_PRODUCT_DELETE"
+  | "SELECTING_CATEGORY"
+  | "AWAITING_NEW_CATEGORY_NAME";
 
 interface TelegramUser {
   id: number;
@@ -426,8 +427,7 @@ export async function POST(req: Request) {
           name: draft.name,
           price: draft.price,
           image_url: draft.image_url,
-          category: draft.category_id, // UUID
-          // category: draft.category_name, // Optional: if legacy text needed
+          category_id: draft.category_id, // CORRECTION: Use category_id mapping
           ai_description: draft.ai_description || null,
           approval_status: "approved",
           in_stock: true,
@@ -684,6 +684,11 @@ export async function POST(req: Request) {
       case "SELECTING_CATEGORY":
       case "AWAITING_FINAL_CONFIRMATION":
         await sendMessage(chatId, "Por favor usa los botones del menú.");
+        break;
+
+      case "AWAITING_CATEGORY":
+        // Legacy/Fallback handling to prevent switch error
+        currentState = "IDLE";
         break;
 
       default:
