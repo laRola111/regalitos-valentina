@@ -454,7 +454,7 @@ export async function POST(req: Request) {
           image_url: draft.image_url,
           category_id: draft.category_id,
           ai_description: draft.ai_description || null,
-          approval_status: "approved",
+          approval_status: true,
           in_stock: true,
         };
         console.log(`[${BUILD_TAG}] >>> DB: INSERT products`, newProduct);
