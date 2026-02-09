@@ -17,7 +17,7 @@ const fontSecondary = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Regalitos Valentina",
+  title: "Regalitos Valentina's | Luxury Shop",
   description: "Detalles que enamoran",
   icons: {
     icon: "/logovalentinasweb.png",

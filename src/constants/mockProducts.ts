@@ -1,6 +1,6 @@
 export const MOCK_CONFIG = {
   id: 1,
-  store_name: "Regalitos Valentina",
+  store_name: "Regalitos Valentina's",
   whatsapp_number: "573001234567", // Replace with real number if available
 };
 

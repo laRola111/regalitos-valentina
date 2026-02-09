@@ -17,8 +17,9 @@ export default function ProductCard({ product, index }: ProductCardProps) {
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const phoneNumber = "573001234567";
-    const message = `Hola Valentina, me interesa el producto: ${product.name} (Ref: Imagen ${product.id - 1}). El precio es $${product.price.toFixed(2)} USD. ¿Está disponible?`;
+    if (product.price === 0) return;
+    const phoneNumber = "16824452794";
+    const message = `¡Hola Maryte! 👋 Vi esto en la web de Regalitos Valentina's: ${product.name}. Precio: $${product.price.toFixed(2)} USD. Me gustaría coordinar la compra.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
@@ -64,8 +65,8 @@ export default function ProductCard({ product, index }: ProductCardProps) {
 
         <div className="mt-4 flex items-end justify-between">
           {product.price === 0 ? (
-            <span className="text-sm font-bold text-[hsl(var(--primary))] uppercase tracking-wide">
-              Consultar disponibilidad
+            <span className="text-sm font-bold text-gray-400 uppercase tracking-wide">
+              Próximamente
             </span>
           ) : (
             <div className="flex flex-col">
@@ -81,14 +82,23 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           )}
 
           {/* Action Button */}
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={handleBuyClick}
-            className="bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))/0.9] text-white px-4 py-2 rounded-xl shadow-lg shadow-[hsl(var(--accent))/0.3] transition-colors flex items-center justify-center gap-2 group/btn font-bold text-sm"
-          >
-            <span>Comprar</span>
-            <ShoppingBag className="w-4 h-4" />
-          </motion.button>
+          {product.price === 0 ? (
+            <button
+              disabled
+              className="bg-gray-100 text-gray-400 px-4 py-2 rounded-xl shadow-none cursor-not-allowed flex items-center justify-center gap-2 font-bold text-sm"
+            >
+              <span>Espera</span>
+            </button>
+          ) : (
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={handleBuyClick}
+              className="bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))/0.9] text-white px-4 py-2 rounded-xl shadow-lg shadow-[hsl(var(--accent))/0.3] transition-colors flex items-center justify-center gap-2 group/btn font-bold text-sm"
+            >
+              <span>Comprar</span>
+              <ShoppingBag className="w-4 h-4" />
+            </motion.button>
+          )}
         </div>
       </div>
     </motion.div>
