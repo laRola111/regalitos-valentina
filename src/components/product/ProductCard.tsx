@@ -11,11 +11,17 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index }: ProductCardProps) {
-  const { addToCart } = useCart();
-
   const isPremium = /Dior|Tom Ford|Medusa|Fendi|Louis Vuitton|Burberry/i.test(
     product.name,
   );
+
+  const handleBuyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const phoneNumber = "573001234567";
+    const message = `Hola Valentina, me interesa el producto: ${product.name} (Ref: Imagen ${product.id - 1}). El precio es $${product.price.toFixed(2)} USD. ¿Está disponible?`;
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
 
   return (
     <motion.div
@@ -77,14 +83,11 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           {/* Action Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
-            onClick={(e) => {
-              e.preventDefault();
-              addToCart(product);
-            }}
-            className="bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))/0.9] text-white p-3 rounded-xl shadow-lg shadow-[hsl(var(--accent))/0.3] transition-colors flex items-center justify-center group/btn"
+            onClick={handleBuyClick}
+            className="bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))/0.9] text-white px-4 py-2 rounded-xl shadow-lg shadow-[hsl(var(--accent))/0.3] transition-colors flex items-center justify-center gap-2 group/btn font-bold text-sm"
           >
-            <ShoppingBag className="w-5 h-5 group-hover/btn:hidden" />
-            <Plus className="w-5 h-5 hidden group-hover/btn:block" />
+            <span>Comprar</span>
+            <ShoppingBag className="w-4 h-4" />
           </motion.button>
         </div>
       </div>

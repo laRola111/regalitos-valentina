@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Product } from "@/hooks/useCatalog";
 import ProductCard from "./ProductCard";
 import { motion } from "framer-motion";
@@ -9,6 +10,18 @@ interface ProductGridProps {
 }
 
 export default function ProductGrid({ products }: ProductGridProps) {
+  useEffect(() => {
+    products.forEach((product) => {
+      const img = new Image();
+      img.src = product.image_url;
+      img.onerror = () => {
+        console.error(
+          `[QA CHECK] Broken Image detected: Product ID ${product.id} - URL: ${product.image_url}`,
+        );
+      };
+    });
+  }, [products]);
+
   if (products.length === 0) {
     return (
       <div className="w-full py-12 text-center text-gray-400">

@@ -19,6 +19,9 @@ const fontSecondary = Inter({
 export const metadata: Metadata = {
   title: "Regalitos Valentina",
   description: "Detalles que enamoran",
+  icons: {
+    icon: "/logovalentinasweb.png",
+  },
 };
 
 export default function RootLayout({
