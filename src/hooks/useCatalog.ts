@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+// import { supabase } from "@/lib/supabase"; // Supabase disabled for presale
+import {
+  MOCK_CONFIG,
+  MOCK_CATEGORIES,
+  MOCK_PRODUCTS,
+} from "@/constants/mockProducts";
 
 export interface Config {
   id: number;
@@ -41,51 +46,13 @@ export const useCatalog = () => {
   });
 
   useEffect(() => {
-    const fetchCatalog = async () => {
-      try {
-        // Fetch Config
-        const { data: configData, error: configError } = await supabase
-          .from("config")
-          .select("*")
-          .eq("id", 1)
-          .single();
-
-        if (configError) throw configError;
-
-        // Fetch Categories
-        const { data: categoriesData, error: categoriesError } = await supabase
-          .from("categories")
-          .select("*")
-          .order("display_order", { ascending: true });
-
-        if (categoriesError) throw categoriesError;
-
-        // Fetch Products
-        const { data: productsData, error: productsError } = await supabase
-          .from("products")
-          .select("*")
-          .eq("in_stock", true);
-
-        if (productsError) throw productsError;
-
-        setData({
-          config: configData,
-          categories: categoriesData || [],
-          products: productsData || [],
-          loading: false,
-          error: null,
-        });
-      } catch (error: any) {
-        console.error("Error fetching catalog:", error);
-        setData((prev) => ({
-          ...prev,
-          loading: false,
-          error: error.message || "Error desconocido",
-        }));
-      }
-    };
-
-    fetchCatalog();
+    setData({
+      config: MOCK_CONFIG,
+      categories: MOCK_CATEGORIES,
+      products: MOCK_PRODUCTS,
+      loading: false, // Immediate Load
+      error: null,
+    });
   }, []);
 
   return data;
