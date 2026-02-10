@@ -22,52 +22,62 @@ export default function Home() {
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Section - Gradient & Premium Look */}
-        <section className="relative mb-16 overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white shadow-2xl">
+        {/* Hero Section - Luxury Gradient & Gold Accents */}
+        <section className="relative mb-16 overflow-hidden rounded-3xl bg-black text-white shadow-2xl">
           {/* Background Decoration */}
-          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-[hsl(var(--primary))] rounded-full blur-[100px] opacity-20"></div>
-          <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-[hsl(var(--accent))] rounded-full blur-[100px] opacity-20"></div>
+          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-[hsl(var(--primary))] rounded-full blur-[120px] opacity-30"></div>
+          <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-[hsl(var(--accent))] rounded-full blur-[100px] opacity-10"></div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="relative z-10 py-16 px-6 sm:py-24 sm:px-12 text-center"
+            transition={{ duration: 0.8 }}
+            className="relative z-10 py-20 px-6 sm:py-32 sm:px-12 text-center"
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase mb-6 text-blue-200">
-              San Valentín 2026
+            <span className="inline-block py-1 px-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-xs font-bold tracking-[0.2em] uppercase mb-8 text-[hsl(var(--primary))]">
+              Exclusive Collection 2026
             </span>
-            <h1 className="text-5xl sm:text-7xl font-black mb-6 tracking-tight leading-none font-[family-name:var(--font-main)]">
-              {config?.store_name || "Regalitos Valentina"}
+            <h1 className="text-5xl sm:text-7xl font-bold mb-6 tracking-tight leading-tight font-[family-name:var(--font-serif)]">
+              {config?.store_name || "Regalitos Valentina's"}
+              <br />
+              <span className="text-[hsl(var(--primary))] italic font-light">
+                Luxury Shop
+              </span>
             </h1>
-            <p className="text-xl sm:text-2xl font-light text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Descubre detalles únicos que crean momentos inolvidables.{" "}
-              <br className="hidden sm:block" />
-              Regalos con alma y estilo.
+            <p className="text-lg sm:text-xl font-light text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-[family-name:var(--font-secondary)]">
+              Redefiniendo la elegancia con una selección curada de calzado,
+              accesorios y alta costura.
             </p>
 
-            <button className="bg-white text-slate-900 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-white/25 transform hover:-translate-y-1">
-              Explorar Colección
+            <button className="bg-[hsl(var(--primary))] text-white px-10 py-4 rounded-sm font-bold hover:bg-[hsl(var(--primary))/0.9] transition-all shadow-[0_10px_30px_rgba(0,0,0,0.3)] transform hover:-translate-y-1 tracking-widest uppercase text-sm">
+              Ver Catálogo
             </button>
           </motion.div>
         </section>
 
         {/* Category Filters */}
-        <section className="mb-12 overflow-x-auto pb-6 scrollbar-hide">
+        <section
+          id="products"
+          className="mb-12 overflow-x-auto pb-6 scrollbar-hide"
+        >
           <div className="flex justify-center flex-wrap gap-3 px-2">
             <FilterButton
-              label="✨ Todos"
+              label="✦ Todo"
               isActive={selectedCategory === "all"}
               onClick={() => setSelectedCategory("all")}
             />
-            {categories.map((category) => (
-              <FilterButton
-                key={category.id}
-                label={category.name}
-                isActive={selectedCategory === category.id}
-                onClick={() => setSelectedCategory(category.id)}
-              />
-            ))}
+            {categories
+              .filter((category) =>
+                products.some((p) => p.category_id === category.id),
+              )
+              .map((category) => (
+                <FilterButton
+                  key={category.id}
+                  label={category.name}
+                  isActive={selectedCategory === category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                />
+              ))}
           </div>
         </section>
 

@@ -30,7 +30,7 @@ export default function Navbar() {
               Inicio
             </Link>
             <Link
-              href="/catalogo"
+              href="/#products"
               className="border-transparent text-[hsl(var(--foreground))] hover:border-[hsl(var(--primary))] hover:text-[hsl(var(--primary))] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
             >
               Catálogo

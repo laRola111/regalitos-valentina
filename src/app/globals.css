@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -5,19 +6,24 @@
   --background: 0 0% 100%;
   --foreground: 0 0% 10%;
 
-  /* Primary: Soft Vibrante Red/Pink */
-  --primary: 350 80% 60%;
+  /* Primary: Gold/Bronze for Luxury */
+  --primary: 43 74% 49%;
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Cream/Beige for clean backgrounds */
-  --secondary: 45 100% 95%;
+  /* Secondary: Subtle Cream */
+  --secondary: 45 100% 98%;
   --secondary-foreground: 0 0% 10%;
 
-  /* Accent: Warm Orange for CTAs */
-  --accent: 20 90% 50%;
+  /* Accent: Deep Elegant Red/Burgundy or keep Orange if brand requires, but Luxury suggests Gold/Black/White/DeepRed. 
+     User generic request said "Precios Premium usen el color HSL primary (Gold/Bronze)". 
+     Let's update Primary to Gold/Bronze as requested.
+  */
+
+  --accent: 350 80% 60%; /* Keeping the valentine red as accent */
   --accent-foreground: 0 0% 100%;
 
   --font-main: "Montserrat", sans-serif;
+  --font-serif: "Playfair Display", serif;
   --font-secondary: "Inter", sans-serif;
 
   --font-sans: var(--font-main);
@@ -34,12 +40,11 @@
   --color-accent-foreground: var(--accent-foreground);
 
   --font-sans: var(--font-main);
+  --font-serif: var(--font-serif);
 }
 
 body {
-  background-color: hsl(
-    var(--secondary)
-  ); /* Using secondary as requested for clean backgrounds? Or keep white? Request said "Crema/Beige para fondos limpios" */
+  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
