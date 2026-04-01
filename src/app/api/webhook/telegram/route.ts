@@ -15,13 +15,13 @@ const MSG_PREFIX = "[V1.5-CONTROL]";
 const OWNER_ID_CHECK = "8343591065";
 const BUILD_TAG = "BUILD_2026_GEMINI_VISION";
 
-// Initialize Supabase
-const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!, {
+// @ts-ignore
+const supabase = (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
   auth: {
     persistSession: false,
     autoRefreshToken: false,
   },
-});
+}) : null as any;
 
 // Initialize Gemini (Standard Stable)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);

@@ -75,6 +75,13 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             ★ EXCLUSIVE
           </div>
         )}
+
+        {/* Oferta Especial Badge para productos en oferta */}
+        {product.price === 70 && (
+          <div className="absolute top-10 right-3 bg-red-600 text-white px-3 py-1 rounded-sm text-[10px] font-bold shadow-md z-20 tracking-widest uppercase border border-red-400">
+            🔥 Oferta Especial
+          </div>
+        )}
       </div>
 
       {/* Content */}

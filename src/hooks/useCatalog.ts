@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // import { supabase } from "@/lib/supabase"; // Supabase disabled for presale
 import {
   MOCK_CONFIG,
@@ -37,23 +37,13 @@ type CatalogData = {
 };
 
 export const useCatalog = () => {
-  const [data, setData] = useState<CatalogData>({
-    config: null,
-    categories: [],
-    products: [],
-    loading: true,
+  const [data] = useState<CatalogData>({
+    config: MOCK_CONFIG,
+    categories: MOCK_CATEGORIES,
+    products: MOCK_PRODUCTS,
+    loading: false, // Immediate Load
     error: null,
   });
-
-  useEffect(() => {
-    setData({
-      config: MOCK_CONFIG,
-      categories: MOCK_CATEGORIES,
-      products: MOCK_PRODUCTS,
-      loading: false, // Immediate Load
-      error: null,
-    });
-  }, []);
 
   return data;
 };
