@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -250,7 +252,7 @@ async function listProductsAsButtons(
     }
 
     const keyboard = {
-      inline_keyboard: products.map((p) => [
+      inline_keyboard: products.map((p: any) => [
         { text: p.name, callback_data: `act_${action}_${p.id}` },
       ]),
     };
@@ -284,7 +286,7 @@ async function getCategoriesKeyboard() {
   }
 
   const buttons =
-    categories?.map((c) => [
+    categories?.map((c: any) => [
       { text: c.name, callback_data: `cat_select_${c.id}` },
     ]) || [];
   buttons.push([{ text: "➕ Nueva Categoría", callback_data: "cat_new" }]);
