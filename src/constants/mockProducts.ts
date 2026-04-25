@@ -24,7 +24,7 @@ export const MOCK_PRODUCTS = [
     price: 85.0,
     image_url: "/products/image0.jpeg",
     category_id: 6,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 2,
@@ -137,7 +137,7 @@ export const MOCK_PRODUCTS = [
     price: 95.0,
     image_url: "/products/image12.jpeg",
     category_id: 6,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 14,
@@ -146,7 +146,7 @@ export const MOCK_PRODUCTS = [
     price: 150.0,
     image_url: "/products/image13.jpeg",
     category_id: 6,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 15,
@@ -164,7 +164,7 @@ export const MOCK_PRODUCTS = [
     price: 130.0,
     image_url: "/products/image15.jpeg",
     category_id: 6,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 17,
@@ -173,7 +173,7 @@ export const MOCK_PRODUCTS = [
     price: 70.0,
     image_url: "/products/image16.jpeg",
     category_id: 6,
-    in_stock: true,
+    in_stock: false,
   },
 
   // --- NEW LUXURY ITEMS (23-29) ---
@@ -205,7 +205,7 @@ export const MOCK_PRODUCTS = [
     price: 40.0,
     image_url: "/products/image25.jpeg",
     category_id: 2, // Cinturón
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 26,
@@ -225,7 +225,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image27.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 28,
@@ -245,7 +245,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image29.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
 
   // --- ITEMS 30-35 (Expanded Catalog) ---
@@ -257,7 +257,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image30.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 31,
@@ -267,7 +267,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image31.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 32,
@@ -339,7 +339,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image38.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 39,
@@ -349,7 +349,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image39.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 40,
@@ -359,7 +359,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image40.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 41,
@@ -369,7 +369,7 @@ export const MOCK_PRODUCTS = [
     price: 40.0,
     image_url: "/products/image41.jpeg",
     category_id: 2, // Cinturones
-    in_stock: true,
+    in_stock: false,
   },
 
   // --- ITEMS 42-46 (Catalog Expansion III) ---
@@ -401,7 +401,7 @@ export const MOCK_PRODUCTS = [
     price: 50.0,
     image_url: "/products/image44.jpeg",
     category_id: 1, // Calzado
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 45,
@@ -664,7 +664,7 @@ export const MOCK_PRODUCTS = [
     id: 72,
     name: "Loewe Puzzle Fold Pouch Set",
     description: "Elegante bolso compacto en cuero premium gris nube. Logotipo Loewe en relieve, herrajes plateados y correa ajustable. Estilo bandolera minimalista.",
-    price: 160.0,
+    price: 70.0,
     image_url: "/products/image67.jpeg",
     category_id: 7,
     in_stock: true,
@@ -685,7 +685,7 @@ export const MOCK_PRODUCTS = [
     price: 160.0,
     image_url: "/products/image69.jpeg",
     category_id: 7,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 75,
@@ -694,7 +694,7 @@ export const MOCK_PRODUCTS = [
     price: 160.0,
     image_url: "/products/image70.jpeg",
     category_id: 7,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 76,
@@ -721,7 +721,7 @@ export const MOCK_PRODUCTS = [
     price: 160.0,
     image_url: "/products/image73.jpeg",
     category_id: 7,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 79,
@@ -730,7 +730,7 @@ export const MOCK_PRODUCTS = [
     price: 160.0,
     image_url: "/products/image74.jpeg",
     category_id: 7,
-    in_stock: true,
+    in_stock: false,
   },
   {
     id: 80,
@@ -813,6 +813,153 @@ export const MOCK_PRODUCTS = [
     price: 90.0,
     image_url: "/products/image83.jpeg",
     category_id: 7,
+  },
+  
+  // --- NEW ITEMS (Batch 9: image84 - image90) ---
+  {
+    id: 89,
+    name: "Saint Laurent (YSL) Cassandre Matelassé Chain Wallet",
+    description: "Elegante bolso tipo sobre en piel negra con acolchado en patrón de chevron. Esta versión \"monochrome\" destaca por tener el logo de metal YSL y la correa de cadena en acabado negro mate, ideal para un look minimalista y sofisticado.",
+    price: 80.0,
+    image_url: "/products/image84.jpeg",
+    category_id: 7,
+    in_stock: true,
+  },
+  {
+    id: 90,
+    name: "Set de Accesorios Térmicos Louis Vuitton Monogram",
+    description: "Kit funcional que incluye una lonchera térmica, fundas para botellas y latas (can coolers), un estuche multiusos y accesorios como llaveros y porta-identificación, todos con el clásico patrón de monograma café y acabados en negro.",
+    price: 50.0,
+    image_url: "/products/image85.jpeg",
+    category_id: 7,
+    in_stock: true,
+  },
+  {
+    id: 91,
+    name: "Set de Viaje Gucci Ophidia GG",
+    description: "Combinación de bolso estilo Duffel y billetera larga. Fabricados en lona GG Supreme color beige/ébano, cuentan con la icónica franja tricolor verde y roja, acabados en cuero marrón y el hardware de doble G en dorado.",
+    price: 90.0,
+    image_url: "/products/image86.jpeg",
+    category_id: 7,
+    in_stock: true,
+  },
+  {
+    id: 92,
+    name: "Bolso Chanel 22 (Shiny Calfskin)",
+    description: "Bolso tipo tote de gran capacidad en piel de becerro brillante con el característico acolchado de la marca. Incluye una cadena entrelazada con metal dorado, las letras \"CHANEL\" en el frente y un estuche pequeño removible a juego.",
+    price: 50.0,
+    image_url: "/products/image87.jpeg",
+    category_id: 7,
+    in_stock: true,
+  },
+  {
+    id: 93,
+    name: "Chanel Classic Double Flap (Red)",
+    description: "El icónico bolso de solapa clásico en piel roja con acolchado de diamante. Presenta el cierre de giro con el logo CC y una correa de cadena entrelazada, ambos en acabado dorado brillante.",
+    price: 70.0,
+    image_url: "/products/image88.jpeg",
+    category_id: 7,
+    in_stock: true,
+  },
+  {
+    id: 94,
+    name: "Reloj Versace Hellenyium Two-Tone",
+    description: "Reloj de lujo con brazalete de acero inoxidable bitono (plata y oro). El bisel destaca por el grabado de la greca griega y el dial blanco plateado incluye el logo de la Medusa en la posición de las 12 en punto.",
+    price: 50.0,
+    image_url: "/products/image89.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 95,
+    name: "Reloj Gucci 25H",
+    description: "Reloj de pulsera con diseño ultra delgado y contemporáneo. Posee una caja de acero con acabados cepillados, una esfera gris con líneas horizontales y el monograma GG distribuido de forma sutil en el dial.",
+    price: 50.0,
+    image_url: "/products/image90.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  
+  // --- NEW ITEMS (Batch 10: image91 - image99) ---
+  {
+    id: 96,
+    name: "Reloj Pandora Signature",
+    description: "Elegante reloj en tono dorado con el nombre de la marca grabado repetidamente en el bisel. La esfera presenta un delicado acabado texturizado con marcadores de hora en cristales brillantes, ideal para un estilo femenino y clásico.",
+    price: 50.0,
+    image_url: "/products/image91.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 97,
+    name: "Reloj Gucci 25H Gold",
+    description: "Reloj de pulsera con un diseño ultra delgado y contemporáneo. Destaca por su caja y brazalete en acero con acabado dorado cepillado, combinado con una esfera negra minimalista que incluye líneas horizontales y el logo de la marca.",
+    price: 50.0,
+    image_url: "/products/image92.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 98,
+    name: "Omega De Ville Prestige",
+    description: "Reloj clásico de lujo con caja y brazalete de eslabones en tono oro amarillo. Posee una llamativa esfera azul profundo con números romanos dorados, ventana de fecha a las 3 en punto y movimiento automático de alta precisión.",
+    price: 80.0,
+    image_url: "/products/image93.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 99,
+    name: "Rolex Datejust (Gold Diamond)",
+    description: "El icónico reloj de lujo en oro amarillo con el característico bisel estriado. La esfera dorada cuenta con marcadores de hora en diamantes y la clásica lente Cyclops sobre la fecha, montado en un brazalete de eslabones pulidos.",
+    price: 90.0,
+    image_url: "/products/image94.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 100,
+    name: "Reloj Rolex Skeleton Concept (Two-Tone)",
+    description: "Reloj de diseño audaz con brazalete bitono en plata y oro. Su principal atractivo es la esfera tipo \"skeleton\" que deja a la vista el mecanismo interno dorado, combinada con un bisel de color negro y detalles en oro.",
+    price: 90.0,
+    image_url: "/products/image95.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 101,
+    name: "Rolex Submariner Date (Blue & Green)",
+    description: "Relojes de buceo profesionales en acero inoxidable. Se presentan dos variantes muy buscadas: una con esfera y bisel azul/negro y otra con esfera y bisel en color verde esmeralda, ambos con marcadores luminiscentes y ventana de fecha.",
+    price: 90.0,
+    image_url: "/products/image96.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 102,
+    name: "Reloj Rolex Complications (Blue Dial)",
+    description: "Reloj sofisticado con caja plateada y bisel dorado. Presenta una esfera azul con números romanos, indicadores de fase lunar y una apertura que muestra parte del movimiento mecánico, complementado con una correa de cuero negro.",
+    price: 90.0,
+    image_url: "/products/image97.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 103,
+    name: "Cartier Panthère (Green Dial Edition)",
+    description: "Reloj de diseño cuadrado con caja y brazalete en tono oro amarillo y bisel engastado con cristales. La esfera verde esmeralda con números romanos blancos crea un contraste vibrante y lujoso.",
+    price: 90.0,
+    image_url: "/products/image98.jpeg",
+    category_id: 3,
+    in_stock: true,
+  },
+  {
+    id: 104,
+    name: "Reloj Rolex Datejust Floral Motif",
+    description: "Reloj femenino en acero inoxidable con un bisel decorado con cristales. La esfera verde destaca por un delicado patrón floral grabado y marcadores de diamante, ofreciendo una estética moderna y refinada.",
+    price: 90.0,
+    image_url: "/products/image99.jpeg",
+    category_id: 3,
     in_stock: true,
   }
 ];

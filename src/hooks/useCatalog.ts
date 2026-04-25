@@ -40,7 +40,7 @@ export const useCatalog = () => {
   const [data] = useState<CatalogData>({
     config: MOCK_CONFIG,
     categories: MOCK_CATEGORIES,
-    products: MOCK_PRODUCTS,
+    products: MOCK_PRODUCTS.filter(p => p.in_stock),
     loading: false, // Immediate Load
     error: null,
   });
