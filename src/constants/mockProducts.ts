@@ -378,7 +378,7 @@ export const MOCK_PRODUCTS = [
     name: "D&G 'Portofino Leather' Sneaker",
     description:
       "Piel de becerro negra premium con el logo Dolce & Gabbana en contraste blanco en la suela. Lujo deportivo.",
-    price: 50.0,
+    price: 110.0,
     image_url: "/products/image42.jpeg",
     category_id: 1, // Calzado
     in_stock: true,
@@ -388,7 +388,7 @@ export const MOCK_PRODUCTS = [
     name: "Gucci 'Denim Monogram' Platform",
     description:
       "Plataforma robusta en denim oscuro con el patrón GG en relieve. Un diseño audaz que combina textura y logomanía.",
-    price: 50.0,
+    price: 110.0,
     image_url: "/products/image43.jpeg",
     category_id: 1, // Calzado
     in_stock: true,
@@ -408,7 +408,7 @@ export const MOCK_PRODUCTS = [
     name: "Fendi 'Roma Straw' Slide",
     description:
       "Artesanía en fibra trenzada y rafia con el logo Fendi Roma bordado en café. Elegancia natural y sofisticada.",
-    price: 50.0,
+    price: 70.0,
     image_url: "/products/image45.jpeg",
     category_id: 1, // Calzado
     in_stock: true,
